@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Ejercicio24MVC.Models.Proyecto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = ("~/Views/Shared/_FrontPage.cshtml");
+}
+<style>
+    table {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+
+<h2>Proyectos</h2>
+@if (User.IsInRole("Admin"))
+{
+    <h3>
+        @Html.ActionLink("Crear Proyecto", "Create", new { title = "Crear un nuevo documento" })
+    </h3>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            }
+            @if (User.IsInRole("Miembros"))
+            {
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>

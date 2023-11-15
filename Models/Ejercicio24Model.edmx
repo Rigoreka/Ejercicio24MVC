@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Ejercicio24Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Ejercicio24ModelStoreContainer">
+    <EntitySet Name="Usuarios" EntityType="Ejercicio24Model.Store.Usuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Proyectos" EntityType="Ejercicio24Model.Store.Proyectos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tareas" EntityType="Ejercicio24Model.Store.Tareas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documentos" EntityType="Ejercicio24Model.Store.Documentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="Ejercicio24Model.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProyectoTarea" Association="Ejercicio24Model.Store.ProyectoTarea">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="Tarea" EntitySet="Tareas" />
+    </AssociationSet>
+    <AssociationSet Name="ProyectoDocumento" Association="Ejercicio24Model.Store.ProyectoDocumento">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="Documento" EntitySet="Documentos" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioTarea" Association="Ejercicio24Model.Store.UsuarioTarea">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Tarea" EntitySet="Tareas" />
+    </AssociationSet>
+    <AssociationSet Name="RolUsuario" Association="Ejercicio24Model.Store.RolUsuario">
+      <End Role="Rol" EntitySet="Roles" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RolId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proyectos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FechaInicio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FechaFin" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tareas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProyectoId" Type="int" Nullable="false" />
+    <Property Name="UsuarioId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Version" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProyectoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="ProyectoTarea">
+    <End Role="Proyecto" Type="Ejercicio24Model.Store.Proyectos" Multiplicity="1" />
+    <End Role="Tarea" Type="Ejercicio24Model.Store.Tareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="ProyectoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProyectoDocumento">
+    <End Role="Proyecto" Type="Ejercicio24Model.Store.Proyectos" Multiplicity="1" />
+    <End Role="Documento" Type="Ejercicio24Model.Store.Documentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="ProyectoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioTarea">
+    <End Role="Usuario" Type="Ejercicio24Model.Store.Usuarios" Multiplicity="1" />
+    <End Role="Tarea" Type="Ejercicio24Model.Store.Tareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RolUsuario">
+    <End Role="Rol" Type="Ejercicio24Model.Store.Roles" Multiplicity="1" />
+    <End Role="Usuario" Type="Ejercicio24Model.Store.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Ejercicio24Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Ejercicio24ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuarios" EntityType="Ejercicio24Model.Usuario" />
+          <EntitySet Name="Proyectos" EntityType="Ejercicio24Model.Proyecto" />
+          <EntitySet Name="Tareas" EntityType="Ejercicio24Model.Tarea" />
+          <EntitySet Name="Documentos" EntityType="Ejercicio24Model.Documento" />
+          <AssociationSet Name="ProyectoTarea" Association="Ejercicio24Model.ProyectoTarea">
+            <End Role="Proyecto" EntitySet="Proyectos" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+          <AssociationSet Name="ProyectoDocumento" Association="Ejercicio24Model.ProyectoDocumento">
+            <End Role="Proyecto" EntitySet="Proyectos" />
+            <End Role="Documento" EntitySet="Documentos" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioTarea" Association="Ejercicio24Model.UsuarioTarea">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="Ejercicio24Model.Rol" />
+          <AssociationSet Name="RolUsuario" Association="Ejercicio24Model.RolUsuario">
+            <End Role="Rol" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tareas" Relationship="Ejercicio24Model.UsuarioTarea" FromRole="Usuario" ToRole="Tarea" />
+          <NavigationProperty Name="Rol" Relationship="Ejercicio24Model.RolUsuario" FromRole="Usuario" ToRole="Rol" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proyecto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="FechaInicio" Type="String" Nullable="false" />
+          <Property Name="FechaFin" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tareas" Relationship="Ejercicio24Model.ProyectoTarea" FromRole="Proyecto" ToRole="Tarea" />
+          <NavigationProperty Name="Documentos" Relationship="Ejercicio24Model.ProyectoDocumento" FromRole="Proyecto" ToRole="Documento" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="FechaVencimiento" Type="String" Nullable="false" />
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proyecto" Relationship="Ejercicio24Model.ProyectoTarea" FromRole="Tarea" ToRole="Proyecto" />
+          <NavigationProperty Name="Usuario" Relationship="Ejercicio24Model.UsuarioTarea" FromRole="Tarea" ToRole="Usuario" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Version" Type="String" Nullable="false" />
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proyecto" Relationship="Ejercicio24Model.ProyectoDocumento" FromRole="Documento" ToRole="Proyecto" />
+        </EntityType>
+        <Association Name="ProyectoTarea">
+          <End Type="Ejercicio24Model.Proyecto" Role="Proyecto" Multiplicity="1" />
+          <End Type="Ejercicio24Model.Tarea" Role="Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProyectoDocumento">
+          <End Type="Ejercicio24Model.Proyecto" Role="Proyecto" Multiplicity="1" />
+          <End Type="Ejercicio24Model.Documento" Role="Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioTarea">
+          <End Type="Ejercicio24Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="Ejercicio24Model.Tarea" Role="Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Ejercicio24Model.RolUsuario" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="RolUsuario">
+          <End Type="Ejercicio24Model.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="Ejercicio24Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Ejercicio24ModelStoreContainer" CdmEntityContainer="Ejercicio24ModelContainer">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(Ejercicio24Model.Usuario)">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proyectos">
+      <EntityTypeMapping TypeName="IsTypeOf(Ejercicio24Model.Proyecto)">
+        <MappingFragment StoreEntitySet="Proyectos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tareas">
+      <EntityTypeMapping TypeName="IsTypeOf(Ejercicio24Model.Tarea)">
+        <MappingFragment StoreEntitySet="Tareas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documentos">
+      <EntityTypeMapping TypeName="IsTypeOf(Ejercicio24Model.Documento)">
+        <MappingFragment StoreEntitySet="Documentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(Ejercicio24Model.Rol)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

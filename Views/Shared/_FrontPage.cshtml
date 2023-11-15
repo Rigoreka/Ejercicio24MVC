@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ejercicico24</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/site.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/favicon.ico">
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top font-family: Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'">
+            <a class="navbar-brand home-link" href="@Url.Action("Index", "Home")" style="font-size: 20px;">Ejercicio24</a>
+            <div class="container px-4 px-lg-5">
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <ul class="nav navbar-nav">
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Documentos", "Index", "Documentos")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Proyectos", "Index", "Proyectos")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Tareas", "Index", "Tareas")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Roles", "Index", "Roles")</li>
+                        </ul>
+                    }
+                    @if (User.IsInRole("Miembros"))
+                    {
+                        <ul class="nav navbar-nav">
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Documentos", "Index", "Documentos")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Proyectos", "Index", "Proyectos")</li>
+                            <li class="nav-link" style="font-size: 20px;">@Html.ActionLink("Tareas", "Index", "Tareas")</li>
+                        </ul>
+                    }
+
+
+                </div>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+
+    </div>
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

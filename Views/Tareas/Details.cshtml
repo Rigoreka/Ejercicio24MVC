@@ -1,0 +1,73 @@
+﻿@model Ejercicio24MVC.Models.Tarea
+
+@{
+    ViewBag.Title = "Details";
+    Layout = ("~/Views/Shared/_FrontPage.cshtml");
+}
+<style>
+    /* ... tus otros estilos ... */
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 20px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .dl-horizontal {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
+        font-size: 20px;
+        column-gap: 20px;
+        margin: 0 auto;
+    }
+</style>
+<h2>Detalles</h2>
+
+<div>
+    <h2>Tarea</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proyecto.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proyecto.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<h3>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</h3>

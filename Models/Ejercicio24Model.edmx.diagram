@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2106fe4b46874ed5963ef6ad1aa2ee45" Name="Diagram1" ZoomLevel="87" >
+        <EntityTypeShape EntityType="Ejercicio24Model.Usuario" Width="1.5" PointX="6" PointY="1.375" />
+        <EntityTypeShape EntityType="Ejercicio24Model.Proyecto" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Ejercicio24Model.Tarea" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="Ejercicio24Model.Documento" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="Ejercicio24Model.ProyectoTarea" />
+        <AssociationConnector Association="Ejercicio24Model.ProyectoDocumento" />
+        <AssociationConnector Association="Ejercicio24Model.UsuarioTarea" />
+        <EntityTypeShape EntityType="Ejercicio24Model.Rol" Width="1.5" PointX="8.875" PointY="1.75" />
+        <AssociationConnector Association="Ejercicio24Model.RolUsuario" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
